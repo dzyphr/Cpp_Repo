@@ -47,5 +47,6 @@ int main()
 	{
 		print_key_value(key, value);
 	}
+	umap.clear();//empty the container
 	return 0;
 }
