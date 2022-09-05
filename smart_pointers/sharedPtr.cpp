@@ -6,7 +6,7 @@
 #include <mutex>
 #include <cstdarg>
 
-using std::cout, std::shared_ptr, std::mutex, std::lock_guard, std::make_shared;
+using std::cout, std::shared_ptr, std::mutex, std::lock_guard, std::make_shared, std::ref;
 
 struct SharedBase
 {
@@ -67,7 +67,7 @@ int main()
 		<< "values before threading:\n" 
 		<< "ptr val: " << ptr.get()
 		<< "ptr use_count: " << ptr.use_count() << "\n\n";
-	std::thread thread1(spawn, ptr), thread2(spawn, ptr), thread3(spawn, ptr);
+	ref(std::thread) thread1(spawn, ptr), thread2(spawn, ptr), thread3(spawn, ptr);
 	ptr.reset();//release mains ownership of the ptr
 	cout << "the shared pointers share ownership of each thread\n"
                 << "instead of being owned by the main entrypoint:\n"
@@ -75,6 +75,8 @@ int main()
                 << "ptr use_count: " << ptr.use_count() << "\n\n";
 	//thread1.join(); thread2.join(); thread3.join();
 	int i = 3; //number of threads
-	int out = joinThreads(i, std::ref(thread1), std::ref(thread2), std::ref(thread3));
+	int out = joinThreads(i, thread1, thread2, thread3);//using the output is optional but its there to stop a warning in the fn
+							    //idea: use a ref to an array of threads in order to shorten the fn call
+							    //this allows us to forego the use of variadic arguments which is verbose
 	cout << std::to_string(out) << " threads joined, derived pointer deleted after last use\n\n";
 }
