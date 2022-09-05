@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <string.h>
-using std::cout, std::stringstream, std::to_string, std::string;
+using std::cout, std::to_string, std::string;
 template <class Type>
 class TypedSmartPointer
 {
