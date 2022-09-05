@@ -3,7 +3,7 @@
 #include <iostream>
 
 template<typename T>
-struct co_fib//this class name is completely customizable, remember to rename its re-uses properly if so
+struct co_fib
 {
 	struct promise_type;
 	using handle_type = std::coroutine_handle<promise_type>;
