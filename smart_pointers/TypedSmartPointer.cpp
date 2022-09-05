@@ -22,7 +22,7 @@ public:
 	{
 		return *pointer;
 	}
-	//if T represents a type that needs to be accessed overload the arrow opperator
+	//if the Type needs to be accessed, overload the arrow opperator
 	//access the smart pointer like a regular pointer '->'
 	Type* operator -> ()
 	{
@@ -42,4 +42,3 @@ int main()
 	string output = ptrstr + numstr + "\n";
 	cout << output;
 }
-
