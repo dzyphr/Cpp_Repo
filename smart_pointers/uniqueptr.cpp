@@ -39,7 +39,7 @@ struct Derived : Base
 };
 
 //function that consumes a unique pointer, it passes the pointer's value into
-//the function and can handle both return-type 'Rvalues' and lifetime-type 'Lvalues'
+//the function and can handle both right-side/return-type 'Rvalues' and locator/left-side/lifetime 'Lvalues'
 unique_ptr<Derived> pass(std::unique_ptr<Derived> ptr)
 {
 	cout << "\npassing ptr\n\n";
